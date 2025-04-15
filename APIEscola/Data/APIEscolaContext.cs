@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using APIEscola.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIEscola.Data
@@ -10,6 +11,10 @@ namespace APIEscola.Data
         {
         }
         //Propriedade DbSet para cada tabela
+        public DbSet<Aluno> Alunos { get; set; } //Tabela de alunos
+        public DbSet<Curso> Cursos { get; set; } //Tabela de alunos
+        public DbSet<Turma> Turmas { get; set; } //Tabela de usuários
+        public DbSet<Matricula> Matriculas { get; set; } //Tabela de usuários   
 
         //Sobrecarga do método OnModelCreating para configurar o modelo a partir da IdentityDbContext5
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,7 +23,10 @@ namespace APIEscola.Data
             base.OnModelCreating(modelBuilder);
 
             //Configurar a criação de tabelas adicionais aqui
-
+            modelBuilder.Entity<Aluno>().ToTable("Alunos"); //Configura o nome da tabela Alunos
+            modelBuilder.Entity<Curso>().ToTable("Cursos"); //Configura o nome da tabela Alunos
+            modelBuilder.Entity<Turma>().ToTable("Turmas"); //Configura o nome da tabela Usuários
+            modelBuilder.Entity<Matricula>().ToTable("Matriculas"); //Configura o nome da tabela Usuários
         }
     }
 }
